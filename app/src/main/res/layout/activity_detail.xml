@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.grantify.DetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize">
+
+                <ImageView
+                    android:id="@+id/back_detail"
+                    android:layout_width="40dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/iconback"/>
+                <TextView
+                    android:id="@+id/categorytoolbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Schoolarship"
+                    android:textSize="25dp"
+                    android:textStyle="bold" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <!-- Foto poster beasiswa -->
+            <ImageView
+                android:id="@+id/posterImage"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/trainingposter2"
+                android:layout_margin="20dp" />
+
+            <!-- Main penjelasan -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+
+                <!-- Judul beasiswa -->
+                <TextView
+                    android:id="@+id/titleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FGWLP Training K3L"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- foto profil lingkaran (TAPI INI BELUM BISA) -->
+                    <ImageView
+                        android:id="@+id/organizerImage"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/profiltraining1"
+                        android:background="@drawable/borderprofil"
+                        android:layout_marginEnd="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <!-- Pihak yang menyelenggarakan -->
+                        <TextView
+                            android:id="@+id/organizerTextView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="INDOSHE"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="indoshe.com"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@drawable/line" />
+
+                <!-- Tanggal -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Gambar lingkaran -->
+                    <ImageView
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/icondate"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <!-- Pihak yang menyelenggarakan -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="20 Juni 2024"
+                        android:textSize="14sp"
+                        android:layout_marginTop="12dp" />
+                </LinearLayout>
+
+                <!--Linear layout untuk kategori beasiswa-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp">
+                    <TextView
+                        android:id="@+id/category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Training"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/white"
+                        android:background="@drawable/category_item_background"
+                        android:layout_marginTop="10dp"/>
+                    <View
+                        android:layout_width="8dp"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Environment"
+                        android:textSize="14sp"
+                        android:textColor="#6865FB"
+                        android:background="@drawable/bordercriteria"
+                        android:layout_marginTop="10dp"
+                        android:textAlignment="center"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Kategori penjelasan Benefits -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="10dp">
+
+                <!-- Judul kategori -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Benefits"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+
+                <!-- Penjelasan Benefits -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- Sertifikat berstandar nasional"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- Networking"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- Unlimited knowledge"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="- Free untuk fresh graduate"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <!-- Kategori penjelasan Eligibility -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginRight="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="10dp">
+
+                <!-- Judul kategori -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Eligibility"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"/>
+
+                <!-- Penjelasan Eligibility -->
+                <TextView
+                    android:id="@+id/eligibilityTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:justificationMode="inter_word"
+                    android:text="1. Minimum lulusan D3"
+                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2. Mengikuti semua tata tertib kelas FGWLP \n    yang bisa dibaca di Manual FGWLP terlampir."
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    android:layout_marginTop="5dp" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3. Mengikuti pelatihan lengkap offline penuh \n    selama 3 bulan."
+                    android:textSize="16sp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4. Diutamakan yang memiliki passion kuat di \n     bidang menulis dan public speaking"
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+
+            </LinearLayout>
+
+            <!-- Kategori penjelasan About -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp">
+
+                <!-- Judul kategori -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="About"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <!-- Penjelasan About -->
+                <TextView
+                    android:id="@+id/aboutTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="FGWLP (Fresh Graduate Work and Learn Program) merupakan wadah yang tepat bagi fresh graduate untuk mengembangkan dan meningkatkan kemampuan serta pengetahuan di bidang K3."
+                    android:textSize="16sp"
+                    android:justificationMode="inter_word"
+                    android:layout_marginBottom="5dp"/>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Tombol Register dan Icon Bookmark -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:padding="16dp"
+        android:background="#C0D3FF">
+
+        <!-- Icon Bookmark -->
+        <ImageView
+            android:id="@+id/bookmarkIcon"
+            android:layout_width="90dp"
+            android:layout_height="50dp"
+            android:src="@drawable/iconbookmark"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:background="@android:color/transparent"/>
+
+        <!-- Tombol Register -->
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:text="Register"
+            android:textSize="22dp"
+            android:background="@drawable/buttononboard"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

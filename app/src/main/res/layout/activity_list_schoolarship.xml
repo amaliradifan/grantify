@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.grantify.ListSchoolarshipActivity">
+
+    <!--toolbar dan back schoolarship-->
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <ImageView
+            android:id="@+id/back_list_schoolarship"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/iconback"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Schoolarship"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- search bar-->
+    <android.widget.SearchView
+        android:id="@+id/searchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:queryHint="Search"
+        android:theme="@style/Widget.AppCompat.SearchView"
+        android:queryBackground="@android:color/transparent"
+        android:background="@drawable/searchview_border"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- container schoolarship-->
+        <LinearLayout
+            android:id="@+id/schoolarshipList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="15dp">
+
+            <!--Linearlayout untuk setiap item beasiswa-->
+            <LinearLayout
+                android:id="@+id/sejuta_cita"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/schoolarposter1"
+                    android:background="@drawable/image_border"
+                    />
+
+                <!--Linear layout untuk detail beasiswa-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Beasiswa Sejuta Cita"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="24 April 2024"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"/>
+
+                    <!--Linear layout untuk kategori beasiswa-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Schoolarship"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/white"
+                            android:background="@drawable/category_item_background"
+                            android:layout_marginTop="10dp"/>
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SMP"
+                            android:textSize="14sp"
+                            android:textColor="#6865FB"
+                            android:background="@drawable/bordercriteria"
+                            android:layout_marginTop="10dp" />
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SMA"
+                            android:textSize="14sp"
+                            android:textColor="#6865FB"
+                            android:background="@drawable/bordercriteria"
+                            android:layout_marginTop="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!--Linearlayout untuk setiap item beasiswa-->
+            <LinearLayout
+                android:id="@+id/djarum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp"
+                android:background="@drawable/list_item_border"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/schoolarposter3"
+                    android:background="@drawable/image_border"
+                    />
+
+                <!--Linear layout untuk detail beasiswa-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Beasiswa Djarum 2024"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="18 Mei 2024"
+                        android:textSize="18sp"
+                        android:layout_marginTop="10dp"/>
+
+                    <!--Linear layout untuk kategori beasiswa-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Schoolarship"
+                            android:textSize="14sp"
+                            android:textColor="@android:color/white"
+                            android:background="@drawable/category_item_background"
+                            android:layout_marginTop="10dp"/>
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="D4"
+                            android:textSize="14sp"
+                            android:textColor="#6865fb"
+                            android:background="@drawable/bordercriteria"
+                            android:layout_marginTop="10dp" />
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="wrap_content"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="S1"
+                            android:textSize="14sp"
+                            android:textColor="#6865fb"
+                            android:background="@drawable/bordercriteria"
+                            android:layout_marginTop="10dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

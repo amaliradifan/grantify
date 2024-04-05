@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/splash_screen"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity" android:gravity="top"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/background_splash_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_onboard" />
+
+    <ImageView
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_above="@+id/app_tag_text"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="60dp"
+        android:src="@drawable/image_onboard3" />
+
+    <TextView
+        android:textStyle="bold"
+        android:id="@+id/app_tag_text"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/app_tag_text2" android:layout_centerHorizontal="true" android:text="Welcome To\nGrantify"
+        android:textSize="40sp"  android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/app_tag_text2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_above="@+id/circle_center" android:layout_centerHorizontal="true" android:text="Develop Your Skill"
+        android:textSize="20sp"  android:textColor="@color/black"  />
+
+    <LinearLayout
+        android:id="@+id/circle_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp"
+        android:layout_above="@+id/btn_next3" android:layout_centerHorizontal="true">
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/onboard_circle_off"
+            android:layout_marginRight="5dp"/>
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_marginRight="5dp"
+            android:background="@drawable/onboard_circle_off"/>
+        <View
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:background="@drawable/onboard_circle"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_next3"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        android:text="NEXT"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/buttononboard"/>
+
+</RelativeLayout>

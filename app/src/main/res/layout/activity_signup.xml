@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Input Name -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/imagesignup"
+        android:layout_marginLeft="50dp"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="fitEnd"
+        android:src="@drawable/bgsignup"
+        android:layout_alignParentBottom="true"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Sign Up"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/nameEditText"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"/>
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textColorHint="@color/white"
+        android:textSize="18dp"
+        android:textColor="#ffff"
+        android:inputType="textPersonName"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/emailEditText"
+        android:background="@drawable/borderwhite"
+        android:padding="14dp"/>
+
+    <!-- Input Email -->
+    <EditText
+        android:id="@+id/emailEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textColorHint="@color/white"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/white"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_above="@id/passwordEditText"
+        android:background="@drawable/borderwhite"
+        android:padding="14dp"
+        />
+
+    <!-- Input Password -->
+    <EditText
+        android:id="@+id/passwordEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Password"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:inputType="textPassword"
+        android:textSize="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:layout_above="@id/signupButton"
+        android:background="@drawable/borderwhite"
+        android:padding="14dp"/>
+
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signupButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textStyle="bold"
+        android:textColor="#6865fb"
+        android:textSize="22dp"
+        android:padding="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/button_primary"
+        android:layout_above="@+id/login_text"
+        android:layout_marginTop="20dp"
+        />
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Do you have account? Click here!"
+        android:textColor="@color/white"
+        android:layout_alignParentBottom="true"
+        android:textSize="18dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        />
+
+</RelativeLayout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <!-- Input Name -->
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitEnd"
+        android:src="@drawable/bgsignup" />
+
+    <ImageView
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/image_onboard_loginsignup"
+        android:layout_marginLeft="50dp"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/white"
+        android:text="Let’s get start growing together with"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="20dp"
+        android:layout_above="@+id/loginButtonOnboard"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"/>
+
+    <Button
+        android:background="@drawable/borderwhite"
+        android:id="@+id/loginButtonOnboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:textSize="22dp"
+        android:padding="14dp"
+        android:layout_above="@id/signupButtonOnboard"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="20dp"
+        />
+    <!-- Sign Up Button -->
+    <Button
+        android:id="@+id/signupButtonOnboard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign Up"
+        android:textStyle="bold"
+        android:textColor="#6865fb"
+        android:textSize="22dp"
+        android:padding="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/button_primary"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="100dp"
+        />
+
+
+</RelativeLayout>

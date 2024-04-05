@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- border_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Set border color -->
+    <stroke
+        android:width="2dp"
+        android:color="#6865FB" />
+    <!-- Set background color to transparent -->
+    <solid android:color="@android:color/transparent" />
+    <!-- Set corner radius -->
+    <corners android:radius="8dp" />
+    <padding
+        android:left="6dp"
+        android:top="3dp"
+        android:right="6dp"
+        android:bottom="3dp"/>
+</shape>
