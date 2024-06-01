@@ -275,10 +275,10 @@
                     android:id="@+id/aboutTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="FGWLP (Fresh Graduate Work and Learn Program) merupakan wadah yang tepat bagi fresh graduate untuk mengembangkan dan meningkatkan kemampuan serta pengetahuan di bidang K3."
-                    android:textSize="16sp"
+                    android:layout_marginBottom="5dp"
                     android:justificationMode="inter_word"
-                    android:layout_marginBottom="5dp"/>
+                    android:text="FGWLP (Fresh Graduate Work and Learn Program) merupakan wadah yang tepat bagi fresh graduate untuk mengembangkan dan meningkatkan kemampuan serta pengetahuan di bidang K3."
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -313,7 +313,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textColor="@color/white"
-            android:text="Register"
+            android:text="More Info"
             android:textSize="22dp"
             android:background="@drawable/buttononboard"/>
 

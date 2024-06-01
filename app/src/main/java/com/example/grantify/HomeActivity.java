@@ -10,8 +10,23 @@ import android.widget.LinearLayout;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.grantify.api.RetrofitClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    ProgramAdapter programAdapter;
+    List<Program> programList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +37,6 @@ public class HomeActivity extends AppCompatActivity {
         CardView cardViewSchoolarship = findViewById(R.id.schoolarship);
         CardView cardViewVolunteer = findViewById(R.id.volunteer);
         CardView cardViewTraining = findViewById(R.id.training);
-        LinearLayout sejutaCita = findViewById(R.id.sejuta_cita);
-        LinearLayout schoolunteer = findViewById(R.id.schoolunteer);
         LinearLayout search = findViewById(R.id.btn_search);
         LinearLayout bookmark = findViewById(R.id.btn_bookmark);
         LinearLayout user = findViewById(R.id.btn_user);
@@ -65,33 +78,6 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        sejutaCita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(HomeActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.schoolarposter1);
-                intent.putExtra("judul", "Beasiswa Sejuta Cita");
-                intent.putExtra("penyelenggara", "IND Beasiswa");
-                intent.putExtra("category", "Schoolarship");
-                intent.putExtra("hexCategory", R.drawable.category_item_background);
-                startActivity(intent);
-            }
-        });
-
-        schoolunteer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(HomeActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.volunteerposter1);
-                intent.putExtra("judul", "Schoolunteer 2024");
-                intent.putExtra("penyelenggara", "Schoolunteer");
-                intent.putExtra("category", "volunteer");
-                intent.putExtra("hexCategory", R.drawable.category_item_volunteer);
-                startActivity(intent);
-            }
-        });
 
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +119,29 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
+        recyclerView = findViewById(R.id.rc_home);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        programAdapter = new ProgramAdapter(programList);
+        recyclerView.setAdapter(programAdapter);
 
+        fetchPrograms();
+    }
+
+    private void fetchPrograms(){
+        RetrofitClient.getRetrofitClient().getPrograms().enqueue(new Callback<List<Program>>() {
+            @Override
+            public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    programList.addAll(response.body());
+                    programAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Program>> call, Throwable t) {
+
+            }
+        });
     }
 }

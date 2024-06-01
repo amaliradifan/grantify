@@ -1,0 +1,83 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
+    android:layout_marginBottom="16dp"
+    android:layout_gravity="center"
+    card_view:cardCornerRadius="20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:background="@drawable/list_item_border">
+
+        <ImageView
+            android:id="@+id/imageProgram"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:background="@drawable/image_border"
+            android:scaleType="centerCrop"
+            android:layout_marginRight="16dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
+            />
+
+
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Category Title"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/imageProgram" />
+
+        <TextView
+            android:id="@+id/textOpenDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Open : "
+            android:textSize="16dp"
+            android:layout_toRightOf="@+id/imageProgram"
+            android:layout_below="@+id/textTitle"/>
+        <TextView
+            android:id="@+id/textCloseDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Due To :"
+            android:textSize="16dp"
+            android:layout_toRightOf="@+id/imageProgram"
+            android:layout_below="@+id/textOpenDate" />
+
+        <TextView
+            android:id="@+id/textCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/category_item_background"
+            android:text="Category"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/imageProgram"
+            android:layout_below="@+id/textCloseDate"
+            android:layout_marginTop="10dp"/>
+
+
+        <TextView
+            android:id="@+id/textCriteria"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordercriteria"
+            android:text="Criteria"
+            android:textColor="#6865FB"
+            android:textSize="14sp"
+            android:layout_toRightOf="@+id/textCategory"
+            android:layout_below="@id/textCloseDate"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="16dp"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
