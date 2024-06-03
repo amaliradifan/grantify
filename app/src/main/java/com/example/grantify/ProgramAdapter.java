@@ -1,5 +1,6 @@
 package com.example.grantify;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -35,13 +37,21 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         holder.tvCategory.setText(programList.get(position).getCategory());
         String imageUrl = programList.get(position).getImage();
 
+        if (programList.get(position).getCategory().equals("Scholarship")) {
+            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_background));
+        } else if (programList.get(position).getCategory().equals("Volunteer")) {
+            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_volunteer));
+            holder.tvCategory.setTextColor(Color.parseColor("#6865FB"));
+        } else if (programList.get(position).getCategory().equals("Training")) {
+            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_training));
+        }
+
         Glide.with(holder.itemView.getContext())
                 .load(imageUrl)
                 .placeholder(R.drawable.ic_launcher_background) // Gambar yang ditampilkan sementara sedang diunduh
                 .error(R.drawable.ic_launcher_background) // Gambar yang ditampilkan jika terjadi kesalahan
                 .into(holder.img);
     }
-
     @Override
     public int getItemCount() {
         return programList.size();
@@ -59,5 +69,4 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             img = itemView.findViewById(R.id.imageProgram);
         }
     }
-
 }

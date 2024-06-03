@@ -1,51 +1,40 @@
 package com.example.grantify;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.grantify.api.RetrofitClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListSchoolarshipActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    ProgramAdapter programAdapter;
+    List<Program> programList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_schoolarship);
 
-        LinearLayout sejutaCita = findViewById(R.id.sejuta_cita);
-        LinearLayout djarum = findViewById(R.id.djarum);
         ImageView buttonBack = findViewById(R.id.back_list_schoolarship);
-
-        sejutaCita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(ListSchoolarshipActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.schoolarposter1);
-                intent.putExtra("judul", "Beasiswa Sejuta Cita");
-                intent.putExtra("penyelenggara", "IND Beasiswa");
-                intent.putExtra("category", "Schoolarship");
-                intent.putExtra("hexCategory", R.drawable.category_item_background);
-                startActivity(intent);
-            }
-        });
-
-        djarum.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(ListSchoolarshipActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.schoolarposter3);
-                intent.putExtra("judul", "Beasiswa Djarum 2024");
-                intent.putExtra("penyelenggara", "PT Djarum");
-                intent.putExtra("category", "Schoolarship");
-                intent.putExtra("hexCategory", R.drawable.category_item_background);
-                startActivity(intent);
-            }
-        });
+        recyclerView = findViewById(R.id.rc_scholarships);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        programAdapter = new ProgramAdapter(programList);
+        recyclerView.setAdapter(programAdapter);
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +42,28 @@ public class ListSchoolarshipActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
+
+        fetchPrograms();
     }
+
+    private void fetchPrograms(){
+        RetrofitClient.getRetrofitClient().getPrograms("scholarship").enqueue(new Callback<List<Program>>() {
+            @Override
+            public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    programList.clear();
+                    programList.addAll(response.body());
+                    programAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Program>> call, Throwable t) {
+                // Tangani kegagalan request
+            }
+        });
+    }
+
     @Override
     public void onBackPressed() {
         // Cek apakah ada tumpukan fragmen pada back stack

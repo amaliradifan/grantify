@@ -1,55 +1,65 @@
 package com.example.grantify;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.Toolbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.grantify.api.RetrofitClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListVolunteerActivity extends AppCompatActivity {
+    RecyclerView recyclerView;
+    LinearLayoutManager layoutManager;
+    ProgramAdapter programAdapter;
+    List<Program> programList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_volunteer);
 
-        LinearLayout schoolunteerVolun = findViewById(R.id.schoolunteerVolun);
-        LinearLayout ekspedisi = findViewById(R.id.ekspedisi);
         ImageView buttonBack = findViewById(R.id.back_list_volunteer);
+        recyclerView = findViewById(R.id.rc_volunteer);
+        layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(layoutManager);
+        programAdapter = new ProgramAdapter(programList);
+        recyclerView.setAdapter(programAdapter);
 
-        schoolunteerVolun.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(ListVolunteerActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.volunteerposter1);
-                intent.putExtra("judul", "Schoolunteer 2024");
-                intent.putExtra("penyelenggara", "Schoolunteer");
-                intent.putExtra("category", "volunteer");
-                intent.putExtra("hexCategory", R.drawable.category_item_volunteer);
-                startActivity(intent);
-            }
-        });
-
-        ekspedisi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(ListVolunteerActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.volunteerposter2);
-                intent.putExtra("judul", "Ekspedisi Tebar Inspirasi");
-                intent.putExtra("penyelenggara", "Ekspedisi");
-                intent.putExtra("category", "volunteer");
-                intent.putExtra("hexCategory", R.drawable.category_item_volunteer);
-                startActivity(intent);
-            }
-        });
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onBackPressed();
+            }
+        });
+
+        fetchPrograms();
+    }
+
+    private void fetchPrograms(){
+        RetrofitClient.getRetrofitClient().getPrograms("volunteer").enqueue(new Callback<List<Program>>() {
+            @Override
+            public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    programList.clear();
+                    programList.addAll(response.body());
+                    programAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Program>> call, Throwable t) {
+                // Tangani kegagalan request
             }
         });
     }
