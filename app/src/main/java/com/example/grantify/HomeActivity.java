@@ -22,7 +22,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements ProgramAdapter.OnItemClickListener {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     ProgramAdapter programAdapter;
@@ -122,14 +122,14 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rc_home);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        programAdapter = new ProgramAdapter(programList);
+        programAdapter = new ProgramAdapter(programList, this);
         recyclerView.setAdapter(programAdapter);
 
         fetchPrograms();
     }
 
     private void fetchPrograms(){
-        RetrofitClient.getRetrofitClient().getPrograms().enqueue(new Callback<List<Program>>() {
+        RetrofitClient.getRetrofitClient().getPrograms("", "").enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
                 if(response.isSuccessful() && response.body() != null){
@@ -143,5 +143,17 @@ public class HomeActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    @Override
+    public void onItemClick(Program program) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("PROGRAM_TITLE", program.getTitle());
+        intent.putExtra("PROGRAM_CATEGORY", program.getCategory());
+        intent.putExtra("PROGRAM_IMAGE", program.getImage());
+        intent.putExtra("PROGRAM_UPLOADER", program.getUploader());
+        intent.putExtra("PROGRAM_CRITERIA", program.getCriteria());
+        startActivity(intent);
     }
 }

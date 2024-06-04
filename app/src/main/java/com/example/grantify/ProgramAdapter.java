@@ -18,10 +18,13 @@ import java.util.List;
 public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder>{
 
     private List<Program> programList;
+    private OnItemClickListener listener;
 
-    public ProgramAdapter(List<Program> programList) {
+    public ProgramAdapter(List<Program> programList, OnItemClickListener listener) {
         this.programList = programList;
+        this.listener = listener;
     }
+
 
     @NonNull
     @Override
@@ -36,6 +39,7 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         holder.tvTitle.setText(programList.get(position).getTitle());
         holder.tvCategory.setText(programList.get(position).getCategory());
         String imageUrl = programList.get(position).getImage();
+        holder.bind(programList.get(position), listener);
 
         if (programList.get(position).getCategory().equals("Scholarship")) {
             holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_background));
@@ -68,5 +72,25 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
             tvCategory = itemView.findViewById(R.id.textCategory);
             img = itemView.findViewById(R.id.imageProgram);
         }
+        public void bind(final Program program, final OnItemClickListener listener) {
+            tvTitle.setText(program.getTitle());
+            tvCategory.setText(program.getCategory());
+            Glide.with(itemView.getContext())
+                    .load(program.getImage())
+                    .placeholder(R.drawable.ic_launcher_background)
+                    .error(R.drawable.ic_launcher_background)
+                    .into(img);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClick(program);
+                }
+            });
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Program program);
     }
 }

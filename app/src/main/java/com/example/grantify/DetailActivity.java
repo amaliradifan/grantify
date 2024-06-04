@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 public class DetailActivity extends AppCompatActivity {
 
     @Override
@@ -44,15 +46,20 @@ public class DetailActivity extends AppCompatActivity {
         });
 
 
-        int gambar = getIntent().getIntExtra("gambar", 0);
-        String judul = getIntent().getStringExtra("judul");
-        String penyelenggara = getIntent().getStringExtra("penyelenggara");
-        String category = getIntent().getStringExtra("category");
+        String gambar = getIntent().getStringExtra("PROGRAM_IMAGE");
+
+        String judul = getIntent().getStringExtra("PROGRAM_TITLE");
+        String penyelenggara = getIntent().getStringExtra("PROGRAM_UPLOADER");
+        String category = getIntent().getStringExtra("PROGRAM_CATEGORY");
         int categoryHex = getIntent().getIntExtra("hexCategory",0);
 
         judulText.setText(judul);
         penyelenggaraText.setText(penyelenggara);
-        gambarDetail.setImageResource(gambar);
+        Glide.with(this)
+                .load(gambar)
+                .placeholder(R.drawable.ic_launcher_background) // Placeholder gambar sementara
+                .error(R.drawable.ic_launcher_background) // Gambar yang ditampilkan jika terjadi kesalahan
+                .into(gambarDetail);
         categoryText.setText(category);
         categoryText.setBackgroundResource(categoryHex);
         buttonRegister.setBackgroundResource(categoryHex);
@@ -62,7 +69,6 @@ public class DetailActivity extends AppCompatActivity {
             categoryText.setTextColor(Color.parseColor("#6865fb"));
             buttonRegister.setTextColor(Color.parseColor("#6865fb"));
         }
-
     }
 
     @Override

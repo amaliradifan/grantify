@@ -10,8 +10,8 @@ import retrofit2.http.Query;
 
 public interface ApiService {
     @GET("programs")
-    Call<List<Program>> getPrograms();
+    Call<List<Program>> getPrograms(@Query("category") String category, @Query("q") String query);
 
     @GET("programs")
-    Call<List<Program>> getPrograms(@Query("category") String category);
+    Call<List<Program>> searchPrograms(@Query("q") String query);
 }
