@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
@@ -8,13 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
+import com.example.grantify.model.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +71,7 @@ public class ListTrainingActivity extends AppCompatActivity implements ProgramAd
 
     private void fetchPrograms(String query) {
         Log.d(TAG, "fetchPrograms: Fetching programs with query: " + query);
-        RetrofitClient.getRetrofitClient().getPrograms("Training", query).enqueue(new Callback<List<Program>>() {
+        RetrofitClient.getRetrofitClient(this).getPrograms("Training", query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
                 if (response.isSuccessful() && response.body() != null) {

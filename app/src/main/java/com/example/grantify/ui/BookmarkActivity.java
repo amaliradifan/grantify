@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.grantify.R;
 
 public class BookmarkActivity extends AppCompatActivity {
 

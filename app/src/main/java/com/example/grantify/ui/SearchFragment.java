@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.SearchView;
 
+import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
+import com.example.grantify.model.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -91,7 +93,7 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
     }
 
     private void fetchPrograms(String query) {
-        RetrofitClient.getRetrofitClient().searchPrograms(query).enqueue(new Callback<List<Program>>() {
+        RetrofitClient.getRetrofitClient(requireContext()).searchPrograms(query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
                 if (response.isSuccessful() && response.body() != null) {

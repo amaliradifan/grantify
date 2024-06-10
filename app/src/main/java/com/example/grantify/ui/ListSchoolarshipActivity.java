@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
+import com.example.grantify.model.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +68,7 @@ public class ListSchoolarshipActivity extends AppCompatActivity implements Progr
 
     private void fetchPrograms(String query) {
         Log.d(TAG, "fetchPrograms: Fetching programs with query: " + query);
-        RetrofitClient.getRetrofitClient().getPrograms("scholarship", query).enqueue(new Callback<List<Program>>() {
+        RetrofitClient.getRetrofitClient(this).getPrograms("scholarship", query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
                 if (response.isSuccessful() && response.body() != null) {

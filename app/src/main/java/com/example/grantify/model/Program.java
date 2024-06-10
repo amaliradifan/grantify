@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.model;
 
 import java.util.List;
 

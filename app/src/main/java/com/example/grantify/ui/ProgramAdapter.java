@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.grantify.R;
+import com.example.grantify.model.Program;
 
 import java.util.List;
 

@@ -1,36 +1,49 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.grantify.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link FragmentOnboarding1#newInstance} factory method to
+ * Use the {@link FragmentOnboarding3#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentOnboarding1 extends Fragment {
+public class FragmentOnboarding3 extends Fragment {
 
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public FragmentOnboarding1() {
+    public FragmentOnboarding3() {
         // Required empty public constructor
     }
 
-    public static FragmentOnboarding1 newInstance(String param1, String param2) {
-        FragmentOnboarding1 fragment = new FragmentOnboarding1();
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment FragmentOnboarding3.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static FragmentOnboarding3 newInstance(String param1, String param2) {
+        FragmentOnboarding3 fragment = new FragmentOnboarding3();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -51,10 +64,10 @@ public class FragmentOnboarding1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_onboarding1, container, false);
+        View view = inflater.inflate(R.layout.fragment_onboarding3, container, false);
 
         // Mengambil referensi button next
-        Button btnNext = view.findViewById(R.id.btn_next1);
+        Button btnNext = view.findViewById(R.id.btn_next3);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,7 +80,7 @@ public class FragmentOnboarding1 extends Fragment {
     }
 
     private void showNextFragment() {
-        FragmentOnboarding2 fragment = new FragmentOnboarding2();
+        FragmenLoginSignup fragment = new FragmenLoginSignup();
         FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         // Menambahkan animasi untuk transisi fragment
@@ -75,6 +88,4 @@ public class FragmentOnboarding1 extends Fragment {
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
-
-
 }

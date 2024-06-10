@@ -1,13 +1,9 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-
-import com.example.grantify.FragmentOnboarding1;
-import com.example.grantify.FragmentOnboarding2;
-import com.example.grantify.FragmentOnboarding3;
 
 public class OnboardingPagerAdapter extends FragmentPagerAdapter {
 

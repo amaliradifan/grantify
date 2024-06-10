@@ -19,37 +19,37 @@
             android:name=".OnboardingAdapter"
             android:exported="false" />
         <activity
-            android:name=".ListVolunteerActivity"
+            android:name=".ui.ListVolunteerActivity"
             android:exported="false" />
         <activity
-            android:name=".ListTrainingActivity"
+            android:name=".ui.ListTrainingActivity"
             android:exported="false" />
         <activity
-            android:name=".BookmarkActivity"
+            android:name=".ui.BookmarkActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity"
+            android:name=".ui.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailActivity"
+            android:name=".ui.DetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ListSchoolarshipActivity"
+            android:name=".ui.ListSchoolarshipActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".ui.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".ui.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false" />
         <activity
             android:name=".SignupActivitiy"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

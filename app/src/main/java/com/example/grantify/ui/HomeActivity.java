@@ -1,4 +1,4 @@
-package com.example.grantify;
+package com.example.grantify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,10 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
+import com.example.grantify.api.TokenManager;
+import com.example.grantify.model.Program;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,8 +97,12 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
                 // Pindah ke activity lain
                 Intent intent = new Intent(HomeActivity.this, UserActivity.class);
                 startActivity(intent);
+                // Hapus token saat pengguna logout
+                TokenManager tokenManager = new TokenManager(HomeActivity.this);
+                tokenManager.deleteToken();
             }
         });
+
 
         search.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,7 +136,7 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
     }
 
     private void fetchPrograms(){
-        RetrofitClient.getRetrofitClient().getPrograms("", "").enqueue(new Callback<List<Program>>() {
+        RetrofitClient.getRetrofitClient(this).getPrograms("", "").enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
                 if(response.isSuccessful() && response.body() != null){
