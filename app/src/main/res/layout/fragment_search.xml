@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/white">
+
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
@@ -14,6 +16,7 @@
             android:layout_width="40dp"
             android:layout_height="wrap_content"
             android:src="@drawable/iconback" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -35,10 +38,39 @@
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp" />
 
+    <TextView
+        android:id="@+id/text_initial_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cari buku yang diinginkan"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="visible"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/text_no_results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tidak ada yang sesuai"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:textSize="16sp" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:padding="16dp" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rc_search"
             android:layout_width="match_parent"

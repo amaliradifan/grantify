@@ -29,159 +29,16 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
         android:layout_below="@id/toolbar">
-
-        <!-- container schoolarship-->
-        <LinearLayout
-            android:id="@+id/bookmark"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rc_volunteer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingVertical="10dp"
-            android:paddingHorizontal="25dp">
-
-            <!--Linearlayout untuk setiap item beasiswa-->
-            <LinearLayout
-                android:id="@+id/sejuta_cita"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="@drawable/list_item_border"
-                android:layout_marginBottom="10dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/schoolarposter1"
-                    android:background="@drawable/image_border"
-                    />
-
-                <!--Linear layout untuk detail beasiswa-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Beasiswa Sejuta Cita"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="24 April 2024"
-                        android:textSize="18sp"
-                        android:layout_marginTop="10dp"/>
-
-                    <!--Linear layout untuk kategori beasiswa-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Schoolarship"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/white"
-                            android:background="@drawable/category_item_background"
-                            android:layout_marginTop="10dp"/>
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SMP"
-                            android:textSize="14sp"
-                            android:textColor="#6865FB"
-                            android:background="@drawable/bordercriteria"
-                            android:layout_marginTop="10dp" />
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="SMA"
-                            android:textSize="14sp"
-                            android:textColor="#6865FB"
-                            android:background="@drawable/bordercriteria"
-                            android:layout_marginTop="10dp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!--Linearlayout untuk setiap item beasiswa-->
-            <LinearLayout
-                android:id="@+id/siap_kerja"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="16dp"
-                android:background="@drawable/list_item_border"
-                android:layout_marginBottom="10dp">
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:src="@drawable/trainingposter1"
-                    android:background="@drawable/image_border"
-                    />
-
-                <!--Linear layout untuk detail beasiswa-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Pelatihan Siap Kerja"
-                        android:textSize="20sp"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="18 Mei 2024"
-                        android:textSize="18sp"
-                        android:layout_marginTop="10dp"/>
-
-                    <!--Linear layout untuk kategori beasiswa-->
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Training"
-                            android:textSize="14sp"
-                            android:textColor="@android:color/white"
-                            android:background="@drawable/category_item_training"
-                            android:layout_marginTop="10dp"/>
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="General"
-                            android:textSize="14sp"
-                            android:textColor="#6865fb"
-                            android:background="@drawable/bordercriteria"
-                            android:layout_marginTop="10dp" />
-                        <View
-                            android:layout_width="8dp"
-                            android:layout_height="wrap_content"/>
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
+            android:nestedScrollingEnabled="false"
+            android:padding="10dp"
+            tools:listitem="@layout/item_program"
+            tools:ignore="InvalidId" />
     </ScrollView>
 
     <FrameLayout

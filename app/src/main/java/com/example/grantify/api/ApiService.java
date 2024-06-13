@@ -4,6 +4,7 @@ import com.example.grantify.model.LoginRequest;
 import com.example.grantify.model.LoginResponse;
 import com.example.grantify.model.Program;
 import com.example.grantify.model.RegisterRequest;
+import com.example.grantify.model.UserProfile;
 
 import java.util.List;
 
@@ -25,4 +26,8 @@ public interface ApiService {
 
     @POST("login")
     Call<LoginResponse> loginUser(@Body LoginRequest loginRequest);
+
+    @GET("profile")
+    Call<UserProfile> getUserProfile();
+
 }

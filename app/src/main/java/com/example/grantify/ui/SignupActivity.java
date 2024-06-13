@@ -74,13 +74,12 @@ public class SignupActivity extends AppCompatActivity {
         apiService.registerUser(registerRequest).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
                     Toast.makeText(SignupActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(intent);
                 } else {
                     try {
-                        // Dapatkan pesan error dari body response
                         String errorResponse = response.errorBody().string();
                         JSONObject jsonObject = new JSONObject(errorResponse);
                         String errorMessage = jsonObject.getString("message");

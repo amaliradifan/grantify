@@ -12,7 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
@@ -35,6 +37,9 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
     private RecyclerView recyclerView;
     private ProgramAdapter programAdapter;
     private List<Program> programList = new ArrayList<>();
+    private TextView textInitialMessage;
+    private TextView textNoResults;
+    private ProgressBar progressBar;
 
     public SearchFragment() {
         // Required empty public constructor
@@ -63,6 +68,10 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
         ImageView buttonDelete = view.findViewById(R.id.back_search);
         SearchView searchView = view.findViewById(R.id.searchView);
         recyclerView = view.findViewById(R.id.rc_search);
+        textInitialMessage = view.findViewById(R.id.text_initial_message);
+        textNoResults = view.findViewById(R.id.text_no_results);
+        progressBar = view.findViewById(R.id.progressBar);
+
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         programAdapter = new ProgramAdapter(programList, this);
         recyclerView.setAdapter(programAdapter);
@@ -79,6 +88,8 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                textInitialMessage.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
                 fetchPrograms(query);
                 return true;
             }
@@ -96,16 +107,22 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
         RetrofitClient.getRetrofitClient(requireContext()).searchPrograms(query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
+                progressBar.setVisibility(View.GONE);
                 if (response.isSuccessful() && response.body() != null) {
                     programList.clear();
                     programList.addAll(response.body());
                     programAdapter.notifyDataSetChanged();
+                    textNoResults.setVisibility(programList.isEmpty() ? View.VISIBLE : View.GONE);
+                } else {
+                    textNoResults.setVisibility(View.VISIBLE);
                 }
             }
 
             @Override
             public void onFailure(Call<List<Program>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 // Handle failure
+                textNoResults.setVisibility(View.VISIBLE);
             }
         });
     }

@@ -25,6 +25,11 @@ public class TokenInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request originalRequest = chain.request();
 
+        // Bypass token handling for the registration endpoint
+        if (originalRequest.url().toString().contains("/register")) {
+            return chain.proceed(originalRequest);
+        }
+
         String token = tokenManager.getToken();
         if (token != null) {
             Request.Builder builder = originalRequest.newBuilder()

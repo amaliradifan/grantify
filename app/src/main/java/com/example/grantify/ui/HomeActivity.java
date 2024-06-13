@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentManager;
@@ -17,6 +18,7 @@ import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
 import com.example.grantify.api.TokenManager;
 import com.example.grantify.model.Program;
+import com.example.grantify.model.UserProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,9 +99,6 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
                 // Pindah ke activity lain
                 Intent intent = new Intent(HomeActivity.this, UserActivity.class);
                 startActivity(intent);
-                // Hapus token saat pengguna logout
-                TokenManager tokenManager = new TokenManager(HomeActivity.this);
-                tokenManager.deleteToken();
             }
         });
 
@@ -133,6 +132,7 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
         recyclerView.setAdapter(programAdapter);
 
         fetchPrograms();
+        fetchUser();
     }
 
     private void fetchPrograms(){
@@ -147,6 +147,25 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
 
             @Override
             public void onFailure(Call<List<Program>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void fetchUser(){
+        RetrofitClient.getRetrofitClient(this).getUserProfile().enqueue(new Callback<UserProfile>() {
+            @Override
+            public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
+                if(response.isSuccessful() && response.body() != null){
+                    UserProfile userProfile = response.body();
+                    // Set username to TextView
+                    TextView textViewUsername = findViewById(R.id.textViewUsername);
+                    textViewUsername.setText(userProfile.getUsername());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserProfile> call, Throwable t) {
 
             }
         });

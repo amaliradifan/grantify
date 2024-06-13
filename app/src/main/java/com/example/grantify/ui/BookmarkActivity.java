@@ -19,42 +19,10 @@ public class BookmarkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmark);
         ImageView buttonBack = findViewById(R.id.back_bookmark);
-        LinearLayout sejutaCita = findViewById(R.id.sejuta_cita);
-        LinearLayout siapKerja = findViewById(R.id.siap_kerja);
         LinearLayout search = findViewById(R.id.btn_search);
         LinearLayout bookmark = findViewById(R.id.btn_bookmark);
         LinearLayout user = findViewById(R.id.btn_user);
         LinearLayout home = findViewById(R.id.btn_home);
-
-
-        sejutaCita.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(BookmarkActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.schoolarposter1);
-                intent.putExtra("judul", "Beasiswa Sejuta Cita");
-                intent.putExtra("penyelenggara", "IND Beasiswa");
-                intent.putExtra("category", "Schoolarship");
-                intent.putExtra("hexCategory", R.drawable.category_item_background);
-                startActivity(intent);
-            }
-        });
-
-        siapKerja.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Pindah ke activity lain dan membawa data
-                Intent intent = new Intent(BookmarkActivity.this, DetailActivity.class);
-                intent.putExtra("gambar", R.drawable.trainingposter1);
-                intent.putExtra("judul", "Pelatihan Siap Kerja");
-                intent.putExtra("penyelenggara", "Siap Kerja");
-                intent.putExtra("category", "Training");
-                intent.putExtra("hexCategory", R.drawable.category_item_training);
-                startActivity(intent);
-            }
-        });
-
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
