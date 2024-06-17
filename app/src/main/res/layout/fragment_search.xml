@@ -11,10 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/back_search"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_transparent_background"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scaleType="centerCrop"
             android:src="@drawable/iconback" />
 
         <TextView
@@ -42,7 +46,7 @@
         android:id="@+id/text_initial_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cari buku yang diinginkan"
+        android:text="Search for the upcoming program"
         android:gravity="center"
         android:padding="16dp"
         android:visibility="visible"
@@ -52,7 +56,7 @@
         android:id="@+id/text_no_results"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tidak ada yang sesuai"
+        android:text="No matches found"
         android:gravity="center"
         android:padding="16dp"
         android:visibility="gone"

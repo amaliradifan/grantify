@@ -11,11 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <ImageView
-            android:id="@+id/back_list_schoolarship"
-            android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/iconback"/>
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_list_schoolarship"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/rounded_transparent_background"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:scaleType="centerCrop"
+                android:src="@drawable/iconback" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,7 +39,7 @@
         android:queryHint="Search"
         android:theme="@style/Widget.AppCompat.SearchView"
         android:queryBackground="@android:color/transparent"
-        android:background="@drawable/searchview_border"
+            android:background="@drawable/searchview_border"
         android:layout_marginTop="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"

@@ -12,17 +12,21 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/back_bookmark"
             android:layout_width="40dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/iconback"/>
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_transparent_background"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:scaleType="centerCrop"
+            android:src="@drawable/iconback" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Bookmark"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold" />
     </androidx.appcompat.widget.Toolbar>
 
@@ -31,8 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:layout_below="@id/toolbar">
+
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rc_volunteer"
+            android:id="@+id/recyclerviewBookmark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
@@ -40,6 +45,17 @@
             tools:listitem="@layout/item_program"
             tools:ignore="InvalidId" />
     </ScrollView>
+
+    <TextView
+        android:id="@+id/text_no_bookmarks"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="You have no bookmarked programs"
+        android:gravity="center"
+        android:padding="16dp"
+        android:visibility="gone"
+        android:textSize="16sp"
+        android:layout_below="@id/toolbar" />
 
     <FrameLayout
         android:id="@+id/fragment_containerHome"
@@ -52,5 +68,4 @@
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_alignParentBottom="true"/>
-
 </RelativeLayout>

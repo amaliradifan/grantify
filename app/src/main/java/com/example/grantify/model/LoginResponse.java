@@ -2,7 +2,7 @@ package com.example.grantify.model;
 
 public class LoginResponse {
     private String message;
-    private String token;
+    private String accessToken;
     private long expirationTime; // Waktu kedaluwarsa token dalam milidetik
 
     public String getMessage() {
@@ -14,11 +14,11 @@ public class LoginResponse {
     }
 
     public String getToken() {
-        return token;
+        return accessToken;
     }
 
     public void setToken(String token) {
-        this.token = token;
+        this.accessToken = token;
     }
 
     public long getExpirationTime() {

@@ -175,6 +175,7 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
     @Override
     public void onItemClick(Program program) {
         Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("PROGRAM_ID", program.getId());
         intent.putExtra("PROGRAM_TITLE", program.getTitle());
         intent.putExtra("PROGRAM_CATEGORY", program.getCategory());
         intent.putExtra("PROGRAM_IMAGE", program.getImage());

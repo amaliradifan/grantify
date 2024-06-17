@@ -1,5 +1,9 @@
 package com.example.grantify.api;
 
+import com.example.grantify.model.Bookmark;
+import com.example.grantify.model.BookmarkRequest;
+import com.example.grantify.model.BookmarkResponse;
+import com.example.grantify.model.EditUserRequest;
 import com.example.grantify.model.LoginRequest;
 import com.example.grantify.model.LoginResponse;
 import com.example.grantify.model.Program;
@@ -10,8 +14,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -30,4 +37,15 @@ public interface ApiService {
     @GET("profile")
     Call<UserProfile> getUserProfile();
 
+    @GET("bookmarks")
+    Call<List<Bookmark>> getBookmarks();
+
+    @POST("bookmark")
+    Call<BookmarkResponse> createBookmark(@Body BookmarkRequest bookmarkRequest);
+
+    @DELETE("bookmark/{id}")
+    Call<Void> deleteBookmark(@Path("id") String bookmarkId);
+
+    @PUT("user/edit")
+    Call<UserProfile> editUser(@Body EditUserRequest request);
 }

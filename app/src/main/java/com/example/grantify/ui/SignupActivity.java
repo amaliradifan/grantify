@@ -74,7 +74,7 @@ public class SignupActivity extends AppCompatActivity {
         apiService.registerUser(registerRequest).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
                     Toast.makeText(SignupActivity.this, "Registration successful", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
                     startActivity(intent);

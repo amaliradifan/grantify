@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +35,7 @@ public class ListSchoolarshipActivity extends AppCompatActivity implements Progr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_schoolarship);
 
-        ImageView buttonBack = findViewById(R.id.back_list_schoolarship);
+        ImageButton buttonBack = findViewById(R.id.back_list_schoolarship);
         searchView = findViewById(R.id.searchViewscholar);
         recyclerView = findViewById(R.id.rc_scholarships);
 

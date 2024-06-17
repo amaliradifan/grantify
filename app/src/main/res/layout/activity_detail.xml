@@ -19,11 +19,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageButton
                     android:id="@+id/back_detail"
                     android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/iconback"/>
+                    android:layout_height="40dp"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/rounded_transparent_background"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/iconback" />
                 <TextView
                     android:id="@+id/categorytoolbar"
                     android:layout_width="wrap_content"
@@ -53,7 +57,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
 
-                <!-- Judul beasiswa -->
                 <TextView
                     android:id="@+id/titleTextView"
                     android:layout_width="match_parent"
@@ -87,11 +90,9 @@
                             android:layout_height="wrap_content"
                             android:text="INDOSHE"
                             android:textSize="16sp"
-                            android:textStyle="bold" />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="indoshe.com"/>
+                            android:textStyle="bold"
+                            android:layout_marginTop="10dp"/>
+
                     </LinearLayout>
                 </LinearLayout>
                 <View
@@ -297,14 +298,16 @@
         android:background="#C0D3FF">
 
         <!-- Icon Bookmark -->
-        <ImageView
+        <ImageButton
             android:id="@+id/bookmarkIcon"
             android:layout_width="90dp"
             android:layout_height="50dp"
             android:src="@drawable/iconbookmark"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
-            android:background="@android:color/transparent"/>
+            android:scaleType="fitCenter"
+            android:background="@drawable/rounded_transparent_background"
+            android:foreground="?android:attr/selectableItemBackground"/>
 
         <!-- Tombol Register -->
         <Button
