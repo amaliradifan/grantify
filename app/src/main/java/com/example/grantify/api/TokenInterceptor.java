@@ -35,7 +35,14 @@ public class TokenInterceptor implements Interceptor {
             Request.Builder builder = originalRequest.newBuilder()
                     .header("Authorization", "Bearer " + token);
             Request newRequest = builder.build();
-            return chain.proceed(newRequest);
+            Response response = chain.proceed(newRequest);
+
+            if (response.code() == 401) {
+                // Token expired, redirect to login activity
+                redirectToLoginActivity();
+            }
+
+            return response;
         } else {
             // Redirect to login activity if token is null (user is not logged in) or expired
             redirectToLoginActivity();

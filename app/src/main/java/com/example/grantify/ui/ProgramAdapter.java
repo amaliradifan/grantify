@@ -15,9 +15,10 @@ import com.bumptech.glide.Glide;
 import com.example.grantify.R;
 import com.example.grantify.model.Program;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder>{
+public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHolder> {
 
     private List<Program> programList;
     private OnItemClickListener listener;
@@ -26,7 +27,6 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
         this.programList = programList;
         this.listener = listener;
     }
-
 
     @NonNull
     @Override
@@ -38,41 +38,34 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ProgramAdapter.ViewHolder holder, int position) {
-        holder.tvTitle.setText(programList.get(position).getTitle());
-        holder.tvCategory.setText(programList.get(position).getCategory());
-        String imageUrl = programList.get(position).getImage();
-        holder.bind(programList.get(position), listener);
-
-        if (programList.get(position).getCategory().equals("Scholarship")) {
-            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_background));
-        } else if (programList.get(position).getCategory().equals("Volunteer")) {
-            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_volunteer));
-            holder.tvCategory.setTextColor(Color.parseColor("#6865FB"));
-        } else if (programList.get(position).getCategory().equals("Training")) {
-            holder.tvCategory.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(), R.drawable.category_item_training));
-        }
-
-        Glide.with(holder.itemView.getContext())
-                .load(imageUrl)
-                .placeholder(R.drawable.ic_launcher_background) // Gambar yang ditampilkan sementara sedang diunduh
-                .error(R.drawable.ic_launcher_background) // Gambar yang ditampilkan jika terjadi kesalahan
-                .into(holder.img);
+        Program program = programList.get(position);
+        holder.bind(program, listener);
     }
+
     @Override
     public int getItemCount() {
         return programList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle;
         TextView tvCategory;
+        TextView tvOpenDate;
+        TextView tvCloseDate;
+        TextView tvCriteria;
+        TextView tvCriteria2;
         ImageView img;
-        public ViewHolder(@NonNull View itemView){
+
+        public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvTitle = itemView.findViewById(R.id.textTitle);
             tvCategory = itemView.findViewById(R.id.textCategory);
             img = itemView.findViewById(R.id.imageProgram);
+            tvOpenDate = itemView.findViewById(R.id.textOpenDate);
+            tvCloseDate = itemView.findViewById(R.id.textCloseDate);
+            tvCriteria = itemView.findViewById(R.id.textCriteria);
+            tvCriteria2 = itemView.findViewById(R.id.textCriteria2);
         }
         public void bind(final Program program, final OnItemClickListener listener) {
             tvTitle.setText(program.getTitle());
@@ -82,6 +75,30 @@ public class ProgramAdapter extends RecyclerView.Adapter<ProgramAdapter.ViewHold
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_background)
                     .into(img);
+
+            if(program.getCriteria().length() < 13 ){
+                tvCriteria.setText(program.getCriteria());
+                tvCriteria2.setVisibility(itemView.GONE);
+
+            } else if (program.getCategory() != "Scholarship" || program.getCriteria().length() >= 13){
+                tvCriteria.setVisibility(itemView.GONE);
+                tvCriteria2.setText(program.getCriteria());
+            }
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+
+            tvOpenDate.setText("Open: " + dateFormat.format(program.getOpenDate()));
+            tvCloseDate.setText("Due To: " + dateFormat.format(program.getCloseDate()));
+
+            if (program.getCategory().equals("Scholarship")) {
+                tvCategory.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.category_item_background));
+                tvCategory.setTextColor(Color.WHITE);
+            } else if (program.getCategory().equals("Volunteer")) {
+                tvCategory.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.category_item_volunteer));
+                tvCategory.setTextColor(Color.parseColor("#6865FB"));
+            } else if (program.getCategory().equals("Training")) {
+                tvCategory.setBackground(ContextCompat.getDrawable(itemView.getContext(), R.drawable.category_item_training));
+                tvCategory.setTextColor(Color.WHITE);
+            }
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

@@ -1,9 +1,11 @@
 package com.example.grantify.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,8 +24,11 @@ import com.example.grantify.model.BookmarkRequest;
 import com.example.grantify.model.BookmarkResponse;
 import com.example.grantify.model.Program;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -53,12 +58,18 @@ public class DetailActivity extends AppCompatActivity {
         TextView categoryToolbar = findViewById(R.id.categorytoolbar);
         Button buttonRegister = findViewById(R.id.registerButton);
         ImageView buttonBack = findViewById(R.id.back_detail);
+        ImageView profile = findViewById(R.id.organizerImage);
+        TextView date = findViewById(R.id.date);
+        TextView criteriaText = findViewById(R.id.tvCriteria);
+        TextView aboutText = findViewById(R.id.aboutTextView);
+        TextView benefitText = findViewById(R.id.tvBenefits);
+        TextView elegibilityText = findViewById(R.id.tvEligibility);
         bookmarkIcon = findViewById(R.id.bookmarkIcon);
 
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String url = "https://www.q-tin.com";
+                String url = getIntent().getStringExtra("PROGRAM_LINK");
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
@@ -73,28 +84,53 @@ public class DetailActivity extends AppCompatActivity {
         });
 
         String gambar = getIntent().getStringExtra("PROGRAM_IMAGE");
+        long openDateTimestamp = getIntent().getLongExtra("PROGRAM_OPEN_DATE", 0);
+        long closeDateTimestamp = getIntent().getLongExtra("PROGRAM_CLOSE_DATE", 0);
+        String orgImage = getIntent().getStringExtra("PROGRAM_PROFIL");
         String judul = getIntent().getStringExtra("PROGRAM_TITLE");
         String penyelenggara = getIntent().getStringExtra("PROGRAM_UPLOADER");
         String category = getIntent().getStringExtra("PROGRAM_CATEGORY");
-        int categoryHex = getIntent().getIntExtra("hexCategory", 0);
+        String benefits = getIntent().getStringExtra("PROGRAM_BENEFITS");
+        String eligibility = getIntent().getStringExtra("PROGRAM_ELIGIBILITY");
+        String about = getIntent().getStringExtra("PROGRAM_ABOUT");
+        String criteria = getIntent().getStringExtra("PROGRAM_CRITERIA");
         programId = getIntent().getStringExtra("PROGRAM_ID");
 
         judulText.setText(judul);
         penyelenggaraText.setText(penyelenggara);
         Glide.with(this)
                 .load(gambar)
-                .placeholder(R.drawable.ic_launcher_background) // Placeholder gambar sementara
-                .error(R.drawable.ic_launcher_background) // Gambar yang ditampilkan jika terjadi kesalahan
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
                 .into(gambarDetail);
+        Glide.with(this)
+                .load(orgImage)
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(profile);
+
         categoryText.setText(category);
-        categoryText.setBackgroundResource(categoryHex);
-        buttonRegister.setBackgroundResource(categoryHex);
         categoryToolbar.setText(category);
 
-        if (categoryHex == R.drawable.category_item_volunteer) {
-            categoryText.setTextColor(Color.parseColor("#6865fb"));
-            buttonRegister.setTextColor(Color.parseColor("#6865fb"));
+        String openDate = formatDate(openDateTimestamp);
+        String closeDate = formatDate(closeDateTimestamp);
+        date.setText(openDate + " - " + closeDate);
+        criteriaText.setText(criteria);
+        aboutText.setText(about);
+        elegibilityText.setText(eligibility);
+        benefitText.setText(benefits);
+
+        if (category.equals("Scholarship")) {
+            categoryText.setBackgroundResource(R.drawable.category_item_background);
+            categoryText.setTextColor(Color.WHITE);
+        } else if (category.equals("Volunteer")) {
+            categoryText.setBackgroundResource(R.drawable.category_item_volunteer);
+            categoryText.setTextColor(Color.parseColor("#6865FB"));
+        } else if (category.equals("Training")) {
+            categoryText.setBackgroundResource(R.drawable.category_item_training);
+            categoryText.setTextColor(Color.WHITE);
         }
+
 
         // Fetch bookmarks to check if the program is already bookmarked
         fetchBookmarks();
@@ -243,5 +279,14 @@ public class DetailActivity extends AppCompatActivity {
             // Jika tidak, lanjutkan ke perilaku default dari tombol back
             super.onBackPressed();
         }
+    }
+
+    private String formatDate(long timestamp) {
+        // Convert timestamp to Date object
+        Date date = new Date(timestamp);
+
+        // Format Date object to desired date format (dd MMM yyyy)
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy", Locale.getDefault());
+        return dateFormat.format(date);
     }
 }

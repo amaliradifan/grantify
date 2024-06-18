@@ -1,17 +1,22 @@
 package com.example.grantify.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Program {
     private String id;
     private String title;
-    private String openDate;
-    private String closeDate;
+    private Date openDate;
+    private Date closeDate;
     private String category;
     private String criteria;
     private String image;
     private String link;
+    private String profil;
+    private String about;
     private String uploader;
+    private String benefits;
+    private String eligibility;
 
     public String getId() {
         return id;
@@ -29,19 +34,19 @@ public class Program {
         this.title = title;
     }
 
-    public String getOpenDate() {
+    public Date getOpenDate() {
         return openDate;
     }
 
-    public void setOpenDate(String openDate) {
+    public void setOpenDate(Date openDate) {
         this.openDate = openDate;
     }
 
-    public String getCloseDate() {
+    public Date getCloseDate() {
         return closeDate;
     }
 
-    public void setCloseDate(String closeDate) {
+    public void setCloseDate(Date closeDate) {
         this.closeDate = closeDate;
     }
 
@@ -77,11 +82,43 @@ public class Program {
         this.link = link;
     }
 
+    public String getProfil() {
+        return profil;
+    }
+
+    public void setProfil(String profil) {
+        this.profil = profil;
+    }
+
+    public String getAbout() {
+        return about;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
     public String getUploader() {
         return uploader;
     }
 
     public void setUploader(String uploader) {
         this.uploader = uploader;
+    }
+
+    public String getBenefits() {
+        return benefits;
+    }
+
+    public void setBenefits(String benefits) {
+        this.benefits = benefits;
+    }
+
+    public String getEligibility() {
+        return eligibility;
+    }
+
+    public void setEligibility(String eligibility) {
+        this.eligibility = eligibility;
     }
 }

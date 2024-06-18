@@ -130,10 +130,20 @@ public class SearchFragment extends Fragment implements ProgramAdapter.OnItemCli
     @Override
     public void onItemClick(Program program) {
         Intent intent = new Intent(getContext(), DetailActivity.class);
+        intent.putExtra("PROGRAM_ID", program.getId());
         intent.putExtra("PROGRAM_TITLE", program.getTitle());
+        intent.putExtra("PROGRAM_OPEN_DATE", program.getOpenDate().getTime());
+        intent.putExtra("PROGRAM_CLOSE_DATE", program.getCloseDate().getTime());
         intent.putExtra("PROGRAM_CATEGORY", program.getCategory());
+        intent.putExtra("PROGRAM_CRITERIA", program.getCriteria());
         intent.putExtra("PROGRAM_IMAGE", program.getImage());
-        intent.putExtra("PROGRAM_COMPANY", program.getUploader());
+        intent.putExtra("PROGRAM_LINK", program.getLink());
+        intent.putExtra("PROGRAM_PROFIL", program.getProfil());
+        intent.putExtra("PROGRAM_ABOUT", program.getAbout());
+        intent.putExtra("PROGRAM_UPLOADER", program.getUploader());
+        intent.putExtra("PROGRAM_BENEFITS", program.getBenefits());
+        intent.putExtra("PROGRAM_ELIGIBILITY", program.getEligibility());
         startActivity(intent);
     }
+
 }

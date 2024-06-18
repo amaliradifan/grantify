@@ -8,6 +8,7 @@
     tools:context="com.example.grantify.ui.DetailActivity">
 
     <ScrollView
+        android:id="@+id/scrollLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -66,6 +67,7 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:layout_marginVertical="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
@@ -117,6 +119,7 @@
 
                     <!-- Pihak yang menyelenggarakan -->
                     <TextView
+                        android:id="@+id/date"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="20 Juni 2024"
@@ -142,6 +145,7 @@
                         android:layout_width="8dp"
                         android:layout_height="wrap_content"/>
                     <TextView
+                        android:id="@+id/tvCriteria"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Environment"
@@ -172,85 +176,39 @@
                     android:text="Benefits"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="5dp"/>
 
                 <!-- Penjelasan Benefits -->
                 <TextView
+                    android:id="@+id/tvBenefits"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="- Sertifikat berstandar nasional"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="- Networking"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="- Unlimited knowledge"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="- Free untuk fresh graduate"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"/>
 
-            </LinearLayout>
-
-            <!-- Kategori penjelasan Eligibility -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp"
-                android:background="@drawable/list_item_border"
-                android:layout_marginRight="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="10dp">
-
-                <!-- Judul kategori -->
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Eligibility"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="10dp"/>
+                    android:layout_marginBottom="5dp"/>
 
                 <!-- Penjelasan Eligibility -->
                 <TextView
-                    android:id="@+id/eligibilityTextView"
+                    android:id="@+id/tvEligibility"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:justificationMode="inter_word"
                     android:text="1. Minimum lulusan D3"
-                    android:textSize="16sp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2. Mengikuti semua tata tertib kelas FGWLP \n    yang bisa dibaca di Manual FGWLP terlampir."
                     android:textSize="16sp"
-                    android:justificationMode="inter_word"
-                    android:layout_marginTop="5dp" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="3. Mengikuti pelatihan lengkap offline penuh \n    selama 3 bulan."
-                    android:textSize="16sp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="4. Diutamakan yang memiliki passion kuat di \n     bidang menulis dan public speaking"
-                    android:textSize="16sp"
-                    android:justificationMode="inter_word"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="5dp"/>
-
+                    android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
+
+
 
             <!-- Kategori penjelasan About -->
             <LinearLayout
@@ -259,7 +217,7 @@
                 android:orientation="vertical"
                 android:padding="16dp"
                 android:background="@drawable/list_item_border"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="100dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp">
 
@@ -291,6 +249,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@id/scrollLayout"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_alignParentBottom="true"

@@ -79,5 +79,18 @@
             android:layout_below="@id/textCloseDate"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/textCriteria2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bordercriteria"
+            android:text="Criteria"
+            android:textColor="#6865FB"
+            android:textSize="14sp"
+            android:layout_below="@+id/textCategory"
+            android:layout_toRightOf="@id/imageProgram"
+            android:layout_marginTop="10dp"
+            />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
