@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.grantify.R;
 import com.example.grantify.api.RetrofitClient;
-import com.example.grantify.api.TokenManager;
 import com.example.grantify.model.Program;
 import com.example.grantify.model.UserProfile;
 
@@ -30,15 +32,20 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity implements ProgramAdapter.OnItemClickListener {
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    ProgramAdapter programAdapter;
-    List<Program> programList = new ArrayList<>();
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private ProgramAdapter programAdapter;
+    private List<Program> programList = new ArrayList<>();
+    private ProgressBar progressBar;
+    private NestedScrollView nestedScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        progressBar = findViewById(R.id.progressBar);
+        nestedScrollView = findViewById(R.id.nestedScrollView);
 
         CardView cardViewUser = findViewById(R.id.user);
         CardView cardViewSchoolarship = findViewById(R.id.schoolarship);
@@ -85,7 +92,6 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
             }
         });
 
-
         bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,7 +110,6 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
             }
         });
 
-
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +119,6 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.fragment_containerHome, fragment);
                 transaction.commit();
-
             }
         });
 
@@ -133,53 +137,69 @@ public class HomeActivity extends AppCompatActivity implements ProgramAdapter.On
         programAdapter = new ProgramAdapter(programList, this);
         recyclerView.setAdapter(programAdapter);
 
+        fetchData();
+    }
+
+    private void fetchData() {
+        // Show the progress bar and hide the main content
+        progressBar.setVisibility(View.VISIBLE);
+        nestedScrollView.setVisibility(View.GONE);
+
+        // Fetch user and program data
         fetchPrograms();
         fetchUser();
     }
 
-    private void fetchPrograms(){
+    private void fetchPrograms() {
         RetrofitClient.getRetrofitClient(this).getPrograms("", "").enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
-                if(response.isSuccessful() && response.body() != null){
+                if (response.isSuccessful() && response.body() != null) {
                     programList.addAll(response.body());
                     programAdapter.notifyDataSetChanged();
                 }
+                checkFetchCompletion();
             }
 
             @Override
             public void onFailure(Call<List<Program>> call, Throwable t) {
-
+                checkFetchCompletion();
             }
         });
     }
 
-    private void fetchUser(){
+    private void fetchUser() {
         RetrofitClient.getRetrofitClient(this).getUserProfile().enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                if(response.isSuccessful() && response.body() != null){
+                if (response.isSuccessful() && response.body() != null) {
                     UserProfile userProfile = response.body();
                     // Set username to TextView
-                    String image = userProfile.getImage();
                     TextView textViewUsername = findViewById(R.id.textViewUsername);
                     ImageView imageViewProfile = findViewById(R.id.imageProfile);
                     textViewUsername.setText(userProfile.getUsername());
                     Glide.with(HomeActivity.this)
-                            .load(image)
+                            .load(userProfile.getImage())
                             .placeholder(R.drawable.oliv)
                             .error(R.drawable.oliv)
                             .into(imageViewProfile);
                 }
+                checkFetchCompletion();
             }
 
             @Override
             public void onFailure(Call<UserProfile> call, Throwable t) {
-
+                checkFetchCompletion();
             }
         });
     }
 
+    private void checkFetchCompletion() {
+        if (programList.size() > 0) {
+            progressBar.setVisibility(View.GONE);
+            nestedScrollView.setVisibility(View.VISIBLE);
+        }
+    }
 
     @Override
     public void onItemClick(Program program) {
