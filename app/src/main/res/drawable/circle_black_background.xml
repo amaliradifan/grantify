@@ -1,0 +1,8 @@
+<!-- circle_black_background.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <stroke
+        android:width="3dp"
+        android:color="#FFFFFF" /> <!-- Warna dan lebar stroke -->
+    <solid android:color="#C0D3FF" /> <!-- Warna latar belakang -->
+</shape>
