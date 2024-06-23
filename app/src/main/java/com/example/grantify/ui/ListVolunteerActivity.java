@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,7 @@ public class ListVolunteerActivity extends AppCompatActivity implements ProgramA
     ProgramAdapter programAdapter;
     List<Program> programList = new ArrayList<>();
     SearchView searchView;
+    ProgressBar progressBar;
 
 
     @Override
@@ -40,6 +43,7 @@ public class ListVolunteerActivity extends AppCompatActivity implements ProgramA
         ImageView buttonBack = findViewById(R.id.back_list_volunteer);
         recyclerView = findViewById(R.id.rc_volunteer);
         searchView = findViewById(R.id.searchView);
+        progressBar = findViewById(R.id.progressBar);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -71,6 +75,8 @@ public class ListVolunteerActivity extends AppCompatActivity implements ProgramA
 
     private void fetchPrograms(String query) {
         Log.d(TAG, "fetchPrograms: Fetching programs with query: " + query);
+        progressBar.setVisibility(View.VISIBLE); // Show the ProgressBar
+
         RetrofitClient.getRetrofitClient(this).getPrograms("Training", query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
@@ -84,10 +90,12 @@ public class ListVolunteerActivity extends AppCompatActivity implements ProgramA
                     programList.clear();
                     programAdapter.notifyDataSetChanged();
                 }
+                progressBar.setVisibility(View.GONE); // Show the ProgressBar
             }
 
             @Override
             public void onFailure(Call<List<Program>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE); // Hide the ProgressBar
                 Log.e(TAG, "onFailure: Failed to fetch programs", t);
             }
         });

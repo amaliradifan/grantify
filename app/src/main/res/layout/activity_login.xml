@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Input Name -->
-
+    <!-- Background Image -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:scaleType="fitEnd"
         android:src="@drawable/bgsignup"
         android:layout_alignParentBottom="true"/>
+
+    <!-- Logo Image -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,6 +19,7 @@
         android:layout_marginTop="50dp"
         android:layout_centerHorizontal="true"/>
 
+    <!-- Title Text -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,6 +32,7 @@
         android:layout_marginBottom="20dp"
         android:gravity="center"/>
 
+    <!-- Email EditText -->
     <EditText
         android:id="@+id/emailEditText"
         android:layout_width="match_parent"
@@ -47,7 +50,7 @@
         android:background="@drawable/borderwhite"
         android:padding="20dp"/>
 
-    <!-- Input Email -->
+    <!-- Password EditText -->
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
@@ -61,39 +64,51 @@
         android:layout_marginEnd="20dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:layout_above="@id/loginButton"
+        android:layout_above="@id/loginButtonlayout"
         android:background="@drawable/borderwhite"
-        android:padding="20dp"
-        />
+        android:padding="20dp"/>
 
-    <!-- Input Password -->
-
-    <Button
-        android:id="@+id/loginButton"
+    <!-- Login Button with ProgressBar -->
+    <RelativeLayout
+        android:id="@+id/loginButtonlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Log In"
-        android:textStyle="bold"
-        android:textColor="#6865fb"
-        android:textSize="22dp"
-        android:padding="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/button_primary"
         android:layout_above="@+id/signup_text"
         android:layout_marginTop="20dp"
-        />
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Log In"
+            android:textStyle="bold"
+            android:textColor="#6865fb"
+            android:textSize="22dp"
+            android:padding="14dp"
+            android:background="@drawable/button_primary"
+            android:visibility="visible"/>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <!-- Signup Text -->
     <TextView
         android:id="@+id/signup_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Don't have account? Click here!"
+        android:text="Don't have an account? Click here!"
         android:textColor="@color/white"
         android:layout_alignParentBottom="true"
         android:textSize="18dp"
         android:layout_marginBottom="80dp"
         android:layout_marginTop="20dp"
-        android:gravity="center"
-        />
+        android:gravity="center"/>
 
 </RelativeLayout>

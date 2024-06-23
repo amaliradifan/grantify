@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.provider.OpenableColumns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -33,9 +34,7 @@ import com.example.grantify.api.RetrofitClient;
 import com.example.grantify.api.TokenManager;
 import com.example.grantify.model.UserProfile;
 
-import java.io.File;
 import java.io.InputStream;
-import java.io.OutputStream;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -51,7 +50,7 @@ public class UserActivity extends AppCompatActivity {
 
     private TextView textViewUsername, textViewEmail, textViewCompany, textViewExperience;
     private ImageView profileView;
-    private ProgressBar progressBar;
+    private FrameLayout progressBar;
     private String username, email, company, experience, image;
 
     @Override
@@ -66,7 +65,7 @@ public class UserActivity extends AppCompatActivity {
         textViewCompany = findViewById(R.id.tvCompany);
         textViewExperience = findViewById(R.id.tvExperience);
         profileView = findViewById(R.id.profileImage);
-        progressBar = findViewById(R.id.progressBar);
+        progressBar = findViewById(R.id.progressBarHolder);
 
         buttonBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,26 +84,7 @@ public class UserActivity extends AppCompatActivity {
         buttonLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new AlertDialog.Builder(UserActivity.this)
-                        .setTitle("Logout Confirmation")
-                        .setMessage("Are you sure you want to logout?")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                TokenManager tokenManager = new TokenManager(UserActivity.this);
-                                tokenManager.deleteToken();
-                                Toast.makeText(UserActivity.this, "Successfully logged out", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(UserActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .setIcon(android.R.drawable.ic_dialog_alert)
-                        .show();
+                showLogoutConfirmationDialog();
             }
         });
 
@@ -114,16 +94,7 @@ public class UserActivity extends AppCompatActivity {
         buttonEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle = new Bundle();
-                bundle.putString("USERNAME", username);
-                bundle.putString("COMPANY", company);
-                bundle.putString("EXPERIENCE", experience);
-
-                EditProfileFragment fragment = EditProfileFragment.newInstance(username, company, experience);
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, fragment)
-                        .addToBackStack(null)
-                        .commit();
+                openEditProfileFragment();
             }
         });
     }
@@ -136,46 +107,15 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void fetchUser() {
-        progressBar.setVisibility(View.VISIBLE);
-
         RetrofitClient.getRetrofitClient(this).getUserProfile().enqueue(new Callback<UserProfile>() {
             @Override
             public void onResponse(Call<UserProfile> call, Response<UserProfile> response) {
-                progressBar.setVisibility(View.GONE);
-
                 if (response.isSuccessful() && response.body() != null) {
-                    UserProfile userProfile = response.body();
-                    username = userProfile.getUsername();
-                    email = userProfile.getEmail();
-                    company = userProfile.getCompany() != null && !userProfile.getCompany().isEmpty() ? userProfile.getCompany() : "-";
-                    experience = userProfile.getExperience() != null && !userProfile.getExperience().isEmpty() ? userProfile.getExperience() : "-";
-                    image = userProfile.getImage();
-
-                    textViewUsername.setText(username);
-                    textViewEmail.setText(email);
-                    textViewCompany.setText(company);
-                    textViewExperience.setText(experience);
-
-                    Glide.with(UserActivity.this)
-                            .load(image)
-                            .apply(new RequestOptions().placeholder(R.drawable.oliv).error(R.drawable.oliv))
-                            .listener(new RequestListener<Drawable>() {
-                                @Override
-                                public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
-
-                                @Override
-                                public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
-                                    progressBar.setVisibility(View.GONE);
-                                    return false;
-                                }
-                            })
-                            .into(profileView);
+                    updateUserProfile(response.body());
                 } else {
                     Toast.makeText(UserActivity.this, "Failed to load user profile", Toast.LENGTH_SHORT).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
@@ -184,6 +124,72 @@ public class UserActivity extends AppCompatActivity {
                 Toast.makeText(UserActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void updateUserProfile(UserProfile userProfile) {
+        username = userProfile.getUsername();
+        email = userProfile.getEmail();
+        company = userProfile.getCompany() != null && !userProfile.getCompany().isEmpty() ? userProfile.getCompany() : "-";
+        experience = userProfile.getExperience() != null && !userProfile.getExperience().isEmpty() ? userProfile.getExperience() : "-";
+        image = userProfile.getImage();
+
+        textViewUsername.setText(username);
+        textViewEmail.setText(email);
+        textViewCompany.setText(company);
+        textViewExperience.setText(experience);
+
+        Glide.with(this)
+                .load(image)
+                .apply(new RequestOptions().placeholder(R.drawable.oliv).error(R.drawable.oliv))
+                .listener(new RequestListener<Drawable>() {
+                    @Override
+                    public boolean onLoadFailed(GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                        progressBar.setVisibility(View.GONE);
+                        return false;
+                    }
+                })
+                .into(profileView);
+    }
+
+    private void showLogoutConfirmationDialog() {
+        new AlertDialog.Builder(UserActivity.this)
+                .setTitle("Logout Confirmation")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        performLogout();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
+    private void performLogout() {
+        TokenManager tokenManager = new TokenManager(UserActivity.this);
+        tokenManager.deleteToken();
+        Toast.makeText(UserActivity.this, "Successfully logged out", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(UserActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+    private void openEditProfileFragment() {
+        EditProfileFragment fragment = EditProfileFragment.newInstance(username, company, experience);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override
@@ -198,8 +204,12 @@ public class UserActivity extends AppCompatActivity {
     }
 
     private void uploadImage(Uri imageUri) {
-        try {
-            InputStream inputStream = getContentResolver().openInputStream(imageUri);
+        try (InputStream inputStream = getContentResolver().openInputStream(imageUri)) {
+            if (inputStream == null) {
+                Toast.makeText(this, "Failed to open image", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             byte[] imageBytes = new byte[inputStream.available()];
             inputStream.read(imageBytes);
 
@@ -213,7 +223,7 @@ public class UserActivity extends AppCompatActivity {
                         Toast.makeText(UserActivity.this, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
                         fetchUser(); // Refresh user profile after successful upload
                     } else {
-                        Toast.makeText(UserActivity.this, "Failed to upload imageeee", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(UserActivity.this, "Failed to upload image", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -227,7 +237,6 @@ public class UserActivity extends AppCompatActivity {
         }
     }
 
-
     private String getFileName(Uri uri) {
         String result = null;
         if (uri.getScheme().equals("content")) {
@@ -238,7 +247,11 @@ public class UserActivity extends AppCompatActivity {
             }
         }
         if (result == null) {
-            result = uri.getLastPathSegment();
+            result = uri.getPath();
+            int cut = result != null ? result.lastIndexOf('/') : -1;
+            if (cut != -1) {
+                result = result.substring(cut + 1);
+            }
         }
         return result;
     }

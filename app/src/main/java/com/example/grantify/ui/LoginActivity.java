@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,8 +21,6 @@ import com.example.grantify.model.LoginResponse;
 
 import org.json.JSONObject;
 
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,6 +29,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private EditText passwordEditText;
+    private ProgressBar progressBar;
+    private Button loginButton;
     private ApiService apiService;
 
     @Override
@@ -39,11 +40,10 @@ public class LoginActivity extends AppCompatActivity {
 
         emailEditText = findViewById(R.id.emailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
+        progressBar = findViewById(R.id.progressBar);
+        loginButton = findViewById(R.id.loginButton);
 
         apiService = RetrofitClient.getRetrofitClient(this);
-
-        Button loginButton = findViewById(R.id.loginButton);
-        TextView signupText = findViewById(R.id.signup_text);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        TextView signupText = findViewById(R.id.signup_text);
         signupText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,22 +71,31 @@ public class LoginActivity extends AppCompatActivity {
 
     private void loginUser(String email, String password) {
         LoginRequest loginRequest = new LoginRequest(email, password);
+
+        // Show progress bar and hide login button text
+        progressBar.setVisibility(View.VISIBLE);
+        loginButton.setText("");
+
         apiService.loginUser(loginRequest).enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                // Hide progress bar and restore login button text
+                progressBar.setVisibility(View.GONE);
+                loginButton.setText("Log In");
+
                 if (response.isSuccessful() && response.body() != null) {
                     LoginResponse loginResponse = response.body();
                     TokenManager tokenManager = new TokenManager(LoginActivity.this);
                     tokenManager.saveToken(loginResponse.getToken());
 
-                    // Pindah ke halaman HomeActivity
+                    // Navigate to HomeActivity
                     Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(intent);
-                    finish(); // Selesaikan aktivitas saat ini
+                    finish(); // Finish the current activity
                 } else {
-                    // Login gagal, tampilkan pesan error
+                    // Login failed, show error message
                     try {
-                        // Dapatkan pesan error dari body response
+                        // Get error message from response body
                         String errorResponse = response.errorBody().string();
                         JSONObject jsonObject = new JSONObject(errorResponse);
                         String errorMessage = jsonObject.getString("message");
@@ -100,11 +110,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                // Koneksi atau request ke server gagal
+                // Hide progress bar and restore login button text
+                progressBar.setVisibility(View.GONE);
+                loginButton.setText("Log In");
+
+                // Connection or request to server failed
                 Log.e("LoginActivity", "Login failed", t);
                 Toast.makeText(LoginActivity.this, "Login failed", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 }

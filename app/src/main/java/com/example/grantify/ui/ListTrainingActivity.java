@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SearchView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +31,7 @@ public class ListTrainingActivity extends AppCompatActivity implements ProgramAd
     ProgramAdapter programAdapter;
     List<Program> programList = new ArrayList<>();
     SearchView searchView;
+    ProgressBar progressBar;
 
 
     @Override
@@ -40,6 +42,7 @@ public class ListTrainingActivity extends AppCompatActivity implements ProgramAd
         ImageView buttonBack = findViewById(R.id.back_list_training);
         recyclerView = findViewById(R.id.rc_training);
         searchView = findViewById(R.id.searchViewTraining);
+        progressBar = findViewById(R.id.progressBar);
 
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -71,6 +74,7 @@ public class ListTrainingActivity extends AppCompatActivity implements ProgramAd
 
     private void fetchPrograms(String query) {
         Log.d(TAG, "fetchPrograms: Fetching programs with query: " + query);
+        progressBar.setVisibility(View.VISIBLE);
         RetrofitClient.getRetrofitClient(this).getPrograms("Training", query).enqueue(new Callback<List<Program>>() {
             @Override
             public void onResponse(Call<List<Program>> call, Response<List<Program>> response) {
@@ -84,10 +88,12 @@ public class ListTrainingActivity extends AppCompatActivity implements ProgramAd
                     programList.clear();
                     programAdapter.notifyDataSetChanged();
                 }
+                progressBar.setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(Call<List<Program>> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 Log.e(TAG, "onFailure: Failed to fetch programs", t);
             }
         });
